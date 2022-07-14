@@ -1,0 +1,22 @@
+{
+  "name": "music.thonly.net",
+  "version": "1.0.0",
+  "description": "Music Streaming",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/THonlyMetaverse/music.thonly.net.git"
+  },
+  "author": "THonly™",
+  "license": "HeartBank®",
+  "bugs": {
+    "url": "https://github.com/THonlyMetaverse/music.thonly.net/issues"
+  },
+  "homepage": "https://github.com/THonlyMetaverse/music.thonly.net#readme",
+  "devDependencies": {
+    "ytdl-core": "^4.11.0"
+  }
+}

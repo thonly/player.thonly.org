@@ -1,10 +1,13 @@
 {
   "name": "music.thonly.net",
   "version": "1.0.0",
-  "description": "Music Streaming",
+  "description": "Music Metaverse",
   "main": "index.mjs",
   "scripts": {
-    "start": "node index.mjs"
+    "start": "sudo nodemon index.mjs",
+    "renew": "sudo certbot --manual --preferred-challenges dns certonly -d dns.thonly.net",
+    "copy1": "sudo cp /etc/letsencrypt/live/dns.thonly.net/fullchain.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net",
+    "copy2": "sudo cp /etc/letsencrypt/live/dns.thonly.net/privkey.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,8 @@
   },
   "homepage": "https://github.com/THonlyMetaverse/music.thonly.net#readme",
   "devDependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
     "ytdl-core": "^4.11.0"
   }
 }

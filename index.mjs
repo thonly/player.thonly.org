@@ -14,12 +14,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send("Hello World");
+    res.json(getMusic());
 });
 
-app.post('/', async (req, res) => {
-    ytdl(req.body.videoID, { filter: 'audioonly' }).pipe(fs.createWriteStream(`${req.body.category}/${req.body.videoID}.webm`));
-    res.json({ time: await client.getTime() });
+app.post('/', (req, res) => {
+    const stream = ytdl(req.body.videoID, { filter: 'audioonly' });
+    //stream.on('info', (info, format) => console.log(info, format));
+    stream.on('progress', (chunkLength, downloaded, total) => console.log("Progress:", Math.floor((downloaded / total) * 100)));
+    stream.pipe(fs.createWriteStream(`music/${req.body.category}/${req.body.videoID}.webm`));
+    res.json({ status: 'success' });
 });
 
 https.createServer({cert, key}, app).listen(432);
@@ -31,3 +34,24 @@ https.createServer({cert, key}, app).listen(432);
 // }
 
 // getInfo('Us-2cMZu0kY');
+
+function getMusic() {
+    const music = { THonly: [], Sisamuth: [], Anime: [], Pop: [], Foreign: [] };
+    
+    for (const dir in music) {
+        const folder = fs.opendirSync('music/' + dir);
+        let files = true;
+
+        while (files) {
+          const file = folder.readSync();
+          if (file) music[dir].push(`${folder.path}/${file.name}`) 
+          else files = false;
+        }
+
+        folder.close();
+    }
+
+    return music;
+}
+
+//console.log(getMusic());

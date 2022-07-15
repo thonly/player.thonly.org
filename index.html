@@ -8,17 +8,24 @@
     </head>
     <body>
         <header>
-            <h1>API Endpoints</h1>
+            <audio></audio>
         </header>
         <main>
             <fieldset>
-                <legend>GET</legend>
-            </fieldset>
-            <fieldset>
-                <legend>POST</legend>
-            </fieldset>
-            <fieldset>
-                <legend>DELETE</legend>
+                <br>
+                <legend>Music Metaverse</legend>
+                <form onsubmit="addMusic(event)">
+                    <select name="category">
+                        <option>THonly</option>
+                        <option>Sisamuth</option>
+                        <option selected>Anime</option>
+                        <option>Pop</option>
+                        <option>Foreign</option>
+                    </select>
+                    <input name="videoID" type="input" placeholder="Video ID" required>
+                    <br><br>
+                    <button type="submit">Add Music</button>
+                </form>
             </fieldset>
         </main>
         <footer>

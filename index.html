@@ -8,12 +8,31 @@
     </head>
     <body>
         <header>
-            <audio></audio>
+            <img>
+            <h1>00:00:00</h1>
+            <section>
+                <button id="pause" onclick="pauseTimer(this)" disabled>Pause</button>
+                <button id="stop" onclick="stopTimer(this)" disabled>Stop</button>
+                <br><br>
+                <button onclick="startTimer(this, 15)">15 Minutes</button>
+                <button onclick="startTimer(this, 30)">30 Minutes</button>
+                <button onclick="startTimer(this, 40)">40 Minutes</button>
+                <br><br>
+                <button onclick="startTimer(this, 60)">1 Hour</button>
+                <button onclick="startTimer(this, 60*2)">2 Hours</button>
+                <button onclick="startTimer(this, 60*3)">3 Hours</button>
+            </section>
         </header>
         <main>
             <fieldset>
-                <br>
-                <legend>Music Metaverse</legend>
+                <legend><h2>Music Library</h2></legend>
+                <audio controls preload></audio>
+                <nav></nav>
+            </fieldset>
+        </main>
+        <footer>
+            <fieldset>
+                <legend><h2>Add Music</h2></legend>
                 <form onsubmit="addMusic(event)">
                     <select name="category">
                         <option>THonly</option>
@@ -24,11 +43,10 @@
                     </select>
                     <input name="videoID" type="input" placeholder="Video ID" required>
                     <br><br>
-                    <button type="submit">Add Music</button>
+                    <button type="submit">Download</button>
+                    <button type="button" onclick="getMusicLibrary()">Get Music Library</button>
                 </form>
             </fieldset>
-        </main>
-        <footer>
             <h6>HeartBank®</h6>
         </footer>
     </body>

@@ -2,3 +2,26 @@ body {
     margin: 0;
     padding: 20px;
 }
+
+header {
+    text-align: center;
+}
+
+header img {
+    width: 100%;
+}
+
+audio {
+    text-align: center;
+}
+
+menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+main img {
+    width: 25px;
+    margin: 0 10px;
+}

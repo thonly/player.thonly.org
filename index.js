@@ -1,13 +1,12 @@
-const img = document.querySelector('img');
+const video = document.querySelector('video');
 const audio = document.querySelector('audio');
-audio.loop = true;
 const categories = ['THonly', 'Sisamuth', 'Anime', 'Pop', 'Foreign'];
 
 window.onload = async () => {
     const library = JSON.parse(localStorage.getItem('library'));
-    img.src = library[categories[0]][0].coverart;
-    img.onclick = () => window.open(`https://www.youtube.com/watch?v=${library[categories[0]][0].id}`, '_blank');
-    audio.src = library[categories[0]][0].url;
+    video.cover = library[categories[0]][0].coverart;
+    video.src = library[categories[0]][0].video;
+    audio.src = library[categories[0]][0].audio;
     renderMusicLibrary(library);
 }
 
@@ -41,6 +40,7 @@ function renderMusicLibrary(library) {
             const li = document.createElement('li');
             const img = document.createElement('img');
             img.src = song.thumbnail;
+            img.onclick = () => window.open(`https://www.youtube.com/watch?v=${song.id}`, '_blank');
             li.append(img, song.title);
             li.onclick = () => playMusic(song);
             menu.append(li);
@@ -49,8 +49,11 @@ function renderMusicLibrary(library) {
 }
 
 function playMusic(song) {
-    audio.src = song.url;
-    audio.play();
+    video.cover = song.coverart;
+    video.src = song.video;
+    audio.src = song.audio;
+    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) video.play()
+    else audio.play();
 }
 
 window.dataLayer = window.dataLayer || [];

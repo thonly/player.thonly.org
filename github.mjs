@@ -1,24 +1,20 @@
 import { exec, spawn } from "child_process";
 
 export default (req, res) => {
-    commit(req);
-    push(res);
+    commit(req, res);
+    //push(res);
 }
 
-function commit(req) {
-    exec(`git add . && git status && git commit -m "download ${req.body.category} => ${req.body.title}"`, (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
+function commit(req, res) {
+    exec(`git add . && git status && git commit -m "download ${req.body.category}: ${req.body.title}" && git push`, (error, stdout, stderr) => {
+        if (error) console.log("Error:", error.message);
+        if (stderr) console.log("StdErr", stderr);
+        if (stdout) console.log("StdOut", stdout);
+        res.json(res.getLibrary());
     });
 }
 
+// deprecated
 function push(res) {
     const ls = spawn("git", ["push"]);
 

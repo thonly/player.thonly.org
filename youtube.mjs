@@ -53,7 +53,7 @@ export function getLibrary() {
 function getData(path, name) {
     const data = {};
     data.id = path.split('/')[2];
-    data.title = name.replace('.webm', '');
+    data.title = name.replace(/\.webm|\.mp4/, '');
     data.audio = `${path}/${data.title}.webm`;
     data.video = `${path}/${data.title}.mp4`;
     data.coverart = `https://i.ytimg.com/vi/${data.id}/maxresdefault.jpg`;

@@ -2,7 +2,7 @@ const video = document.querySelector('video');
 const audio = document.querySelector('audio');
 const categories = ['THonly', 'Sisamuth', 'Anime', 'Pop', 'Foreign'];
 
-export default function renderPlayer() {
+export default () => {
     const library = JSON.parse(localStorage.getItem('library'));
     const favorite = localStorage.getItem('favorite') ? JSON.parse(localStorage.getItem('favorite')) : setFavorite(library[categories[0]][0]);
     video.cover = favorite.coverart;

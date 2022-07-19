@@ -1,16 +1,16 @@
 import { exec, spawn } from "child_process";
 
 export default (req, res) => {
-    commit(req, res);
+    res.json(res.getLibrary());
+    commit(req);
     //push(res);
 }
 
-function commit(req, res) {
+function commit(req) {
     exec(`git add . && git status && git commit -m "download ${req.body.category}: ${req.body.title}" && git push`, (error, stdout, stderr) => {
         if (error) console.log("Error:", error.message);
         if (stderr) console.log("StdErr", stderr);
         if (stdout) console.log("StdOut", stdout);
-        res.json(res.getLibrary());
     });
 }
 

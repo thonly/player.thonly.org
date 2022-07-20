@@ -16,7 +16,7 @@ export default async function (req, res) {
     const audio = ytdl(req.body.videoID, { filter: 'audioonly', quality: 'highestaudio' });
     //audio.on('info', (info, format) => console.log(info, format));
     audio.on('progress', (chunkLength, downloaded, total) => console.log("Progress:", Math.floor((downloaded / total) * 100)));
-    audio.pipe(fs.createWriteStream(`${folder}/${title}.webm`).on('finish', () => console.log("done!")));
+    audio.pipe(fs.createWriteStream(`${folder}/${title}.webm`)).on('close', () => console.log("done!"));
     
     const video = ytdl(req.body.videoID, { filter: 'videoandaudio', quality: 'lowestvideo' });
     //video.on('info', (info, format) => console.log(info, format));
@@ -41,8 +41,7 @@ export function getLibrary() {
                 const song = songFolder.readSync();
                 library[category].push(getData(songFolder.path, song.name));
                 songFolder.close();
-            }
-            else folders = false;
+            } else folders = false;
         }
         categoryFolder.close();    
     }

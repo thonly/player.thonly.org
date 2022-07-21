@@ -21,4 +21,8 @@ app.post('/', async (req, res) => {
     await download(req, res);
 });
 
+app.delete('/', (req, res) => {
+    // todo later 
+});
+
 https.createServer({cert, key}, app).listen(432);

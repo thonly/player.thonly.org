@@ -6,12 +6,9 @@ import git from './github.mjs';
 export default async function (req, res) {
     const title = await getInfo(req.body.videoID);
     const folder = `music/${req.body.category}/${req.body.videoID}`;
+    if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
     req.body.title = title;
     res.getLibrary = getLibrary;
-
-    if (!fs.existsSync(folder)){
-        fs.mkdirSync(folder, { recursive: true });
-    }
 
     const audio = ytdl(req.body.videoID, { filter: 'audioonly', quality: 'highestaudio' });
     //audio.on('info', (info, format) => console.log(info, format));

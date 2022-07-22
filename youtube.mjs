@@ -26,7 +26,7 @@ async function getInfo(videoID) {
     return info.videoDetails.title;
 }
 
-export function getLibrary() {
+export function getLibrary(req=null) {
     const library = { THonly: [], Sisamuth: [], Anime: [], Pop: [], Foreign: [] };
     for (const category in library) {
         const categoryFolder = fs.opendirSync('music/' + category);
@@ -34,15 +34,17 @@ export function getLibrary() {
         while (folders) {
             const folder = categoryFolder.readSync();
             if (folder) {
-                const songFolder = fs.opendirSync(`music/${category}/${folder.name}`);
-                const song = songFolder.readSync();
-                library[category].push(getData(songFolder.path, song.name));
-                songFolder.close();
+                if (folder.isDirectory()) {
+                    const songFolder = fs.opendirSync(`music/${category}/${folder.name}`);
+                    const song = songFolder.readSync();
+                    if (song.name !== '.DS_Store') library[category].push(getData(songFolder.path, song.name));
+                    songFolder.close();
+                }
             } else folders = false;
         }
         categoryFolder.close();    
     }
-    return library;
+    return { library, favorite: req ? library[req.body.category].find(song => song.id === req.body.videoID) : null };
 }
 
 // https://stackoverflow.com/questions/10066638/get-youtube-information-via-json-for-single-video-not-feed-in-javascript

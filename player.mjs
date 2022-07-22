@@ -41,7 +41,7 @@ function playMusic(song) {
     else audio.play();
 }
 
-function setFavorite(song) {
+export function setFavorite(song) {
     localStorage.setItem('favorite', JSON.stringify(song));
     return song;
 }

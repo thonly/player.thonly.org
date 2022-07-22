@@ -1,24 +1,27 @@
 import './timer.mjs';
-import renderPlayer from './player.mjs';
+import renderPlayer, { setFavorite } from './player.mjs';
 
 window.onload = () => {
     renderPlayer();
 }
 
 window.getMusicLibrary = async () => {
-    const library = await fetch('https://dns.thonly.net:432/');
-    localStorage.setItem('library', JSON.stringify(await library.json()));
+    const response = await fetch('https://dns.thonly.net:432/');
+    const data = await response.json();
+    localStorage.setItem('library', JSON.stringify(data.library));
     document.location.reload();
 }
 
 window.addMusic = async event => {
     event.preventDefault();
-    const library = await fetch('https://dns.thonly.net:432/', {
+    const response = await fetch('https://dns.thonly.net:432/', {
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(Object.fromEntries(new FormData(event.target)))
-    });    
-    localStorage.setItem('library', JSON.stringify(await library.json()));
+    });
+    const data = await response.json();
+    localStorage.setItem('library', JSON.stringify(data.library));
+    setFavorite(data.favorite);
     document.location.reload();
 }
 

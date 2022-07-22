@@ -1,7 +1,7 @@
 import { exec, spawn } from "child_process";
 
 export default (req, res) => {
-    res.json(res.getLibrary());
+    res.json(res.getLibrary(req));
     commit(req);
     //push(res);
 }

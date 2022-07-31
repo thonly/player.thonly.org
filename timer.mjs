@@ -11,6 +11,15 @@ const timerElement = document.getElementById('timer');
 const pauseButton = document.getElementById('pause');
 const stopButton = document.getElementById('stop');
 
+window.setTimer = element => {
+    const now = new Date();
+    const time = element.value.split(':');
+    const date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), time[0], time[1]);
+    const minutes = Math.floor((date - now)/(1000*60));
+    //console.log(minutes)
+    window.startTimer(element, minutes);
+}
+
 window.startTimer = (element, minutes=0) => {
     clearInterval(timer);
     timerElement.style.color = 'green';

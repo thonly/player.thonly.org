@@ -8,17 +8,9 @@ let playing = null;
 const video = document.querySelector('video');
 const audio = document.querySelector('audio');
 const timerElement = document.getElementById('timer');
+const timeElement = document.getElementById('time');
 const pauseButton = document.getElementById('pause');
 const stopButton = document.getElementById('stop');
-
-window.setTimer = element => {
-    const now = new Date();
-    const time = element.value.split(':');
-    const date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), time[0], time[1]);
-    const minutes = Math.floor((date - now)/(1000*60));
-    //console.log(minutes)
-    window.startTimer(element, minutes);
-}
 
 window.startTimer = (element, minutes=0) => {
     clearInterval(timer);
@@ -42,7 +34,7 @@ function runTimer(startTime, alarmDuration) {
     timer = setInterval(() => {
         const timerDuration = getFormattedDuration((new Date() - startTime) / 1000);
         timerElement.textContent = timerDuration;
-        if (timerDuration === alarmDuration) {
+        if (checkTime(alarmDuration) || timerDuration === alarmDuration) {
             timerElement.style.color = 'red';
             //startButton.disabled = false;
             play(false);
@@ -76,6 +68,15 @@ window.stopTimer = element => {
     timerElement.style.color = 'black';
     play(null);
 };
+
+function checkTime(alarmDuration) {
+    if (alarmDuration === '00:00:00' && timeElement.value) {
+        const now = new Date();
+        const time = timeElement.value.split(':');
+        //console.log(now.getHours(), time[0], now.getMinutes(), time[1], now.getSeconds(), 0)
+        return now.getHours() == time[0] && now.getMinutes() == time[1] && now.getSeconds() == 0;
+    } return false;
+}
 
 function play(on) {
     switch (on) {

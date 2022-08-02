@@ -17,6 +17,7 @@ window.startTimer = (element, minutes=0) => {
     timerElement.style.color = 'green';
     pauseButton.disabled = false;
     stopButton.disabled = false;
+    timeElement.disabled = true;
 
     play(true);
     playing = true;
@@ -61,8 +62,10 @@ window.pauseTimer = element => {
 window.stopTimer = element => {
     clearInterval(timer);
     startButton.disabled = false;
+    startButton = null;
     pauseButton.disabled = true;
     stopButton.disabled = true;
+    timeElement.disabled = false;
     playing = false;
     pauseButton.textContent = "Pause";
     timerElement.style.color = 'black';

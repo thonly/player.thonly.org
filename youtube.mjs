@@ -65,4 +65,4 @@ async function findFormat(videoID) {
     const format = ytdl.chooseFormat(info.formats, { filter: format => format.container === 'mp4', quality: 'lowestvideo' });
     console.log(format);
 }
-findFormat('ZJfyq-L96Lk');
+//findFormat('ZJfyq-L96Lk');

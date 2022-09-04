@@ -1,4 +1,4 @@
-import template from "./template";
+import template from "./template.mjs";
 
 class ToTimer extends HTMLElement {
     #timer;
@@ -33,7 +33,7 @@ class ToTimer extends HTMLElement {
 
         this.#playing = true;
         this.#pauseButton.textContent = "Pause";
-        this.#element.disabled = true;
+        element.disabled = true;
         if (this.#startButton) this.#startButton.disabled = false;
         this.#startButton = element;
         

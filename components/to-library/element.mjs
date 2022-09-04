@@ -12,7 +12,7 @@ class ToLibrary extends HTMLElement {
 
     render(library) {
         const nav = this.shadowRoot.querySelector('nav');
-        nav.replaceChild();
+        nav.replaceChildren();
 
         this.#categories.forEach(category => {
             const h3 = document.createElement('h3');

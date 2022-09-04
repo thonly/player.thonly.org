@@ -13,13 +13,11 @@ class ToMusic extends HTMLElement {
         this.#video = this.querySelector('to-video').video;
         this.#audio = this.querySelector('to-audio').audio;
         this.#libraryElement = this.querySelector('to-library');
-        console.log(this.#video)
-        console.log(this.#libraryElement.render)
     }
 
     async connectedCallback() {
         const library = this.#getLibrary() || await this.#refreshLibrary();
-        const favorite = localStorage.getItem('favorite') ? JSON.parse(localStorage.getItem('favorite')) : this.#setFavorite(library[categories[0]][0]);
+        const favorite = localStorage.getItem('favorite') ? JSON.parse(localStorage.getItem('favorite')) : this.#setFavorite(library['THonly'][0]);
         this.#video.cover = favorite.coverart;
         this.#video.src = favorite.video;
         this.#audio.src = favorite.audio;

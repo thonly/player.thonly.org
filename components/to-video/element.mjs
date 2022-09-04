@@ -10,15 +10,6 @@ class ToVideo extends HTMLElement {
 
         this.video = this.shadowRoot.querySelector('video');
     }
-
-    playMusic(song) {
-        setFavorite(song);
-        video.cover = song.coverart;
-        video.src = song.video;
-        audio.src = song.audio;
-        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) video.play()
-        else audio.play();
-    }
 }
 
 customElements.define("to-video", ToVideo);

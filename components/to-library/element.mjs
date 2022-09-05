@@ -2,12 +2,18 @@ import template from "./template.mjs";
 
 class ToLibrary extends HTMLElement {
     #categories = ['THonly', 'Sisamuth', 'Anime', 'Pop', 'Foreign'];
-    test = 5;
 
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    async refresh() {
+        const response = await fetch('https://dns.thonly.net:432/');
+        const data = await response.json();
+        this.render(data.library);
+        return data.library;
     }
 
     render(library) {

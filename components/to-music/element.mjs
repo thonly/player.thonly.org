@@ -17,14 +17,15 @@ class ToMusic extends HTMLElement {
 
     async connectedCallback() {
         const library = this.#getLibrary() || await this.#refreshLibrary();
-        const favorite = localStorage.getItem('favorite') ? JSON.parse(localStorage.getItem('favorite')) : this.#setFavorite(library['THonly'][0]);
-        this.#video.cover = favorite.coverart;
-        this.#video.src = favorite.video;
-        this.#audio.src = favorite.audio;
+        const favorite = localStorage.getItem('favorite') ? JSON.parse(localStorage.getItem('favorite')) : library.THonly[0];
+        this.#setFavorite(favorite);
 
         this.addEventListener('to-timer', event => this.#handleTimer(event.detail.event));
         this.addEventListener('to-add', event => this.#handleAdd(event.detail));
-        this.addEventListener('to-library', event => this.#playMusic(event.detail.song));
+        this.addEventListener('to-library', event => {
+            this.#setFavorite(event.detail.song);
+            this.#play(true);
+        });
     }
 
     #handleAdd(detail) {
@@ -46,33 +47,26 @@ class ToMusic extends HTMLElement {
         } return null;
     }
 
-    #updateLibrary(data) {
-        localStorage.setItem('library', JSON.stringify(data.library));
-        this.#setFavorite(data.favorite);
-        this.#libraryElement.render(data.library);
+    async #refreshLibrary() {
+        const library = await this.#libraryElement.refresh();
+        localStorage.setItem('library', JSON.stringify(library));
+        return library;
         //document.location.reload();
     }
 
-    async #refreshLibrary() {
-        const response = await fetch('https://dns.thonly.net:432/');
-        const data = await response.json();
+    #updateLibrary(data) {
         localStorage.setItem('library', JSON.stringify(data.library));
         this.#libraryElement.render(data.library);
-        return data.library;
+        this.#setFavorite(data.favorite);
         //document.location.reload();
     }
 
     #setFavorite(song) {
         localStorage.setItem('favorite', JSON.stringify(song));
-        return song;
-    }
-
-    #playMusic(song) {
-        this.#setFavorite(song);
         this.#video.cover = song.coverart;
         this.#video.src = song.video;
         this.#audio.src = song.audio;
-        this.#play(true);
+        this.scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });
     }
 
     #handleTimer(event) {

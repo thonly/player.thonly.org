@@ -2,7 +2,6 @@ import fs from 'fs';
 import ytdl from 'ytdl-core';
 import git from './github.mjs';
 
-// settings.json: "liveServer.settings.ignoreFiles":["music/**"]
 export default async function (req, res) {
     const title = await getInfo(req.body.videoID);
     const folder = `music/${req.body.category}/${req.body.videoID}`;
@@ -13,12 +12,12 @@ export default async function (req, res) {
     const audio = ytdl(req.body.videoID, { filter: 'audioonly', quality: 'highestaudio' });
     //audio.on('info', (info, format) => console.log(info, format));
     audio.on('progress', (chunkLength, downloaded, total) => console.log("Progress:", Math.floor((downloaded / total) * 100)));
-    audio.pipe(fs.createWriteStream(`${folder}/${title}.webm`)).on('close', () => console.log("done!"));
+    audio.pipe(fs.createWriteStream(`${folder}/${title}.webm`, { mode: 0o777 })).on('close', () => console.log("done!"));
     
     const video = ytdl(req.body.videoID, { filter: 'videoandaudio', quality: 'lowestvideo' });
     //video.on('info', (info, format) => console.log(info, format));
     video.on('progress', (chunkLength, downloaded, total) => console.log("Progress:", Math.floor((downloaded / total) * 100)));
-    video.pipe(fs.createWriteStream(`${folder}/${title}.mp4`).on('finish', () => git(req, res)));
+    video.pipe(fs.createWriteStream(`${folder}/${title}.mp4`, { mode: 0o777 }).on('finish', () => git(req, res)));
 }
 
 async function getInfo(videoID) {

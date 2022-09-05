@@ -11,7 +11,7 @@ async function download(videoID) {
 
     const audio = ytdl(videoID, { filter: 'audioonly', quality: 'highestaudio' });
     audio.on('progress', (chunkLength, downloaded, total) => console.log("Progress:", Math.floor((downloaded / total) * 100)));
-    audio.pipe(fs.createWriteStream(`${path}.webm`)).on('close', () => convert(path));
+    audio.pipe(fs.createWriteStream(`${path}.webm`, { mode: 0o777 })).on('close', () => convert(path));
 }
 
 function convert(path) {

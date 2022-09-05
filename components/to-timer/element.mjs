@@ -79,7 +79,6 @@ class ToTimer extends HTMLElement {
             
             if (this.#checkTime() || timerDuration === this.#alarmDuration) {
                 this.dispatchEvent(new CustomEvent("to-timer", { bubbles: true, composed: true, detail: { event: "alarm" }}));
-            } else if (timerDuration > this.#alarmDuration) {
                 this.#timerElement.style.color = 'red';
                 //startButton.disabled = false;
             }

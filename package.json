@@ -13,8 +13,8 @@
     "test": "node mp3.mjs",
     "admin": "sudo chmod -R 777 .",
     "renew": "sudo certbot --manual --preferred-challenges dns certonly -d dns.thonly.net",
-    "copy1": "sudo cp /etc/letsencrypt/live/dns.thonly.net/fullchain.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net",
-    "copy2": "sudo cp /etc/letsencrypt/live/dns.thonly.net/privkey.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net"
+    "copy1": "sudo cp /etc/letsencrypt/live/dns.thonly.net/fullchain.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net/private",
+    "copy2": "sudo cp /etc/letsencrypt/live/dns.thonly.net/privkey.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net/private"
   },
   "repository": {
     "type": "git",

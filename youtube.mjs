@@ -2,6 +2,7 @@ import fs from 'fs';
 import ytdl from 'ytdl-core';
 import git from './github.mjs';
 
+//TODO: later save metadata into music file?
 export default async function (req, res) {
     const title = await getInfo(req.body.videoID);
     const folder = `music/${req.body.category}/${req.body.videoID}`;

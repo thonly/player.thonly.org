@@ -17,7 +17,7 @@ class ToMusic extends HTMLElement {
 
     async connectedCallback() {
         const library = this.#getLibrary() || await this.#refreshLibrary();
-        const favorite = localStorage.getItem('favorite') ? JSON.parse(localStorage.getItem('favorite')) : library.THonly[0];
+        const favorite = JSON.parse(localStorage.getItem('favorite')) || library.THonly[0];
         this.#setFavorite(favorite);
 
         this.addEventListener('to-timer', event => this.#handleTimer(event.detail.event));
@@ -32,6 +32,7 @@ class ToMusic extends HTMLElement {
         switch(detail.action) {
             case "refresh":
                 this.#refreshLibrary();
+                this.scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });
                 break;
             case "update":
                 this.#updateLibrary(detail.data);

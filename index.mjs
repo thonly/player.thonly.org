@@ -1,12 +1,12 @@
-import fs from 'fs';
-import https from 'https';
+// import fs from 'fs';
+import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import download, { getLibrary } from './youtube.mjs';
 
 // expires on 2022-10-13
-const cert = fs.readFileSync('private/fullchain.pem');
-const key = fs.readFileSync('private/privkey.pem');
+// const cert = fs.readFileSync('private/fullchain.pem');
+// const key = fs.readFileSync('private/privkey.pem');
 
 const app = express();
 app.use(cors());
@@ -25,4 +25,4 @@ app.delete('/', (req, res) => {
     // todo later 
 });
 
-https.createServer({key, cert}, app).listen(333);
+http.createServer(app).listen(432);

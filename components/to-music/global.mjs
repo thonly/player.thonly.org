@@ -1,1 +1,1 @@
-export const ORIGIN = window.location.hostname === '127.0.0.1' ? "https://dns.thonly.org:432/" : "/";
+export const ORIGIN = window.location.hostname === '127.0.0.1' ? "https://dns.thonly.org:432/" : "https://thonly-laughing-memory-7w49jj79pp3rgw-333.preview.app.github.dev/";

@@ -9,12 +9,14 @@
     ]
   },
   "scripts": {
-    "start": "sudo nodemon index.mjs",
+    "start": "nodemon index.mjs",
+    "start2": "sudo nodemon index.mjs",
     "test": "node mp3.mjs",
     "admin": "sudo chmod -R 777 .",
-    "renew": "sudo certbot --manual --preferred-challenges dns certonly -d dns.thonly.net",
-    "copy1": "sudo cp /etc/letsencrypt/live/dns.thonly.net/fullchain.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net/private",
-    "copy2": "sudo cp /etc/letsencrypt/live/dns.thonly.net/privkey.pem /Users/heartbank/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net/private"
+    "renew": "certbot --manual --preferred-challenges dns certonly -d dns.thonly.org",
+    "renew2": "sudo certbot --manual --preferred-challenges dns certonly -d dns.thonly.org",
+    "copy1": "sudo cp /etc/letsencrypt/live/dns.thonly.org/fullchain.pem /Users/siliconwat/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net/private",
+    "copy2": "sudo cp /etc/letsencrypt/live/dns.thonly.org/privkey.pem /Users/siliconwat/Desktop/HeartBank®/THonly™/thonly.net/music.thonly.net/private"
   },
   "repository": {
     "type": "git",

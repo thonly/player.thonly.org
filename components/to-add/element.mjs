@@ -1,3 +1,4 @@
+import { ORIGIN } from "../to-music/global.mjs";
 import template from "./template.mjs";
 
 class ToAdd extends HTMLElement {
@@ -13,7 +14,7 @@ class ToAdd extends HTMLElement {
     
     async addMusic(event) {
         event.preventDefault();
-        const response = await fetch('https://dns.thonly.net:432/', {
+        const response = await fetch(ORIGIN, {
             method: 'POST', 
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(new FormData(event.target)))

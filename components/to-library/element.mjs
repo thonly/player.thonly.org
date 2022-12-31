@@ -1,3 +1,4 @@
+import { ORIGIN } from "../to-music/global.mjs";
 import template from "./template.mjs";
 
 class ToLibrary extends HTMLElement {
@@ -10,7 +11,7 @@ class ToLibrary extends HTMLElement {
     }
 
     async refresh() {
-        const response = await fetch('https://dns.thonly.net:432/');
+        const response = await fetch(ORIGIN);
         const data = await response.json();
         this.render(data.library);
         return data.library;

@@ -23,6 +23,7 @@ app.post('/', async (req, res) => {
 
 app.delete('/', (req, res) => {
     // todo later 
-});
+}); 
 
-http.createServer(app).listen(333); //432
+http.createServer(app).listen(process.env.PORT || 3333);
+// console.log(process.env.PORT) // TODO:

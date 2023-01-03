@@ -3,6 +3,7 @@ import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import download, { getLibrary } from './youtube.mjs';
+import { PORT } from "./global.mjs";
 
 // expires on 2022-10-13
 // const cert = fs.readFileSync('private/fullchain.pem');
@@ -25,5 +26,4 @@ app.delete('/', (req, res) => {
     // todo later 
 }); 
 
-http.createServer(app).listen(process.env.PORT || 3333);
-// console.log(process.env.PORT) // TODO:
+http.createServer(app).listen(process.env.PORT || PORT);

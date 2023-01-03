@@ -27,3 +27,4 @@ app.delete('/', (req, res) => {
 }); 
 
 http.createServer(app).listen(process.env.PORT || PORT);
+// console.log(process.env.PORT) // TODO:

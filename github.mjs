@@ -1,7 +1,10 @@
+import { promises as fs } from 'fs';
 import { exec, spawn } from "child_process";
 
-export default (req, res) => {
-    res.json(res.getLibrary(req));
+export default async (req, res) => {
+    const library = res.getLibrary(req);
+    await fs.writeFile(`music.json`, JSON.stringify(library));
+    res.json(library);
     //commit(req);
     ////push(res);
 }

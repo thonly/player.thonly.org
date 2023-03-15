@@ -1,4 +1,4 @@
-import { ORIGIN } from "../to-music/global.mjs";
+//import { ORIGIN } from "../to-music/global.mjs";
 import template from "./template.mjs";
 
 class ToLibrary extends HTMLElement {
@@ -11,7 +11,8 @@ class ToLibrary extends HTMLElement {
     }
 
     async refresh() {
-        const response = await fetch(ORIGIN);
+        //const response = await fetch(ORIGIN);
+        const response = await fetch("/music.json");
         const data = await response.json();
         this.render(data.library);
         return data.library;

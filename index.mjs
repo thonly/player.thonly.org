@@ -1,4 +1,4 @@
-// import fs from 'fs';
+import { promises as fs } from 'fs';
 import http from 'http';
 import express from 'express';
 import cors from 'cors';
@@ -14,8 +14,10 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json(getLibrary());
+app.get('/', async (req, res) => {
+    const library = getLibrary();
+    await fs.writeFile("music.json", JSON.stringify(library));
+    res.json(library);
 });
 
 app.post('/', async (req, res) => {

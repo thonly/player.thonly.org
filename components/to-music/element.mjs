@@ -16,7 +16,8 @@ class ToMusic extends HTMLElement {
     }
 
     async connectedCallback() {
-        const library = this.#getLibrary() || await this.#refreshLibrary();
+        //const library = this.#getLibrary() || await this.#refreshLibrary();
+        const library = await this.#refreshLibrary();
         const favorite = JSON.parse(localStorage.getItem('favorite')) || library.THonly[0];
         this.#setFavorite(favorite);
 

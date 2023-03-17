@@ -15,7 +15,7 @@ template.innerHTML = `
             <input name="videoID" type="input" placeholder="Video ID" required>
             <br><br>
             <button type="submit">Download</button>
-            <button type="button" onclick="this.getRootNode().host.refreshLibrary()">Refresh Music Library</button>
+            <!--<button type="button" onclick="this.getRootNode().host.refreshLibrary()">Refresh Music Library</button>-->
         </form>
     </fieldset>
 `;

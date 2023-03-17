@@ -12,7 +12,7 @@ class ToLibrary extends HTMLElement {
 
     async refresh() {
         //const response = await fetch(ORIGIN);
-        const response = await fetch("/music.json");
+        const response = await fetch("/music.json", { cache: "no-store" });
         const data = await response.json();
         this.render(data.library);
         return data.library;
